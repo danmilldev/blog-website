@@ -1,3 +1,28 @@
+<template>
+  <div v-if="showPost == true" class="overlay">
+    <div class="overlay-box">
+      <h1>New Post Window</h1>
+      <input v-model="postTitle" autofocus type="text" id="title-input" placeholder="title...">
+      <textarea v-model="postText" name="" id="description-input"
+       cols="30" rows="10" placeholder="blog description..."></textarea>
+      <p v-if="errorMessage" class="errorMessage"> {{ errorMessage }}</p>
+      <button @click="addPost">Add Post</button>
+      <button @click="cleanOnClose">Close</button>
+    </div>
+  </div>
+
+  <div class="header">
+    <h1>Blog</h1>
+    <button @click="showPost = true">New Post</button>
+  </div>
+  <div class="blog-cards">
+    <div v-for="post in posts" class="card">
+      <h1>{{post.title}}</h1>
+      <p>{{post.description}}</p>
+    </div>
+  </div>
+</template>
+
 <script setup>
 //import statements
 import { ref } from "vue";
@@ -48,31 +73,6 @@ function cleanOnClose() {
 
 </script>
 
-<template>
-  <div v-if="showPost == true" class="overlay">
-    <div class="overlay-box">
-      <h1>New Post Window</h1>
-      <input v-model="postTitle" autofocus type="text" id="title-input" placeholder="title...">
-      <textarea v-model="postText" name="" id="description-input"
-       cols="30" rows="10" placeholder="blog description..."></textarea>
-      <p v-if="errorMessage" class="errorMessage"> {{ errorMessage }}</p>
-      <button @click="addPost">Add Post</button>
-      <button @click="cleanOnClose">Close</button>
-    </div>
-  </div>
-
-  <div class="header">
-    <h1>Blog</h1>
-    <button @click="showPost = true">New Post</button>
-  </div>
-  <div class="blog-cards">
-    <div v-for="post in posts" class="card">
-      <h1>{{post.title}}</h1>
-      <p>{{post.description}}</p>
-    </div>
-  </div>
-</template>
-
 <style scoped>
 
 .header{
@@ -80,16 +80,24 @@ function cleanOnClose() {
   justify-content: space-around;
   align-items: center;
   text-align: center;
+  background-color: black;
 }
 
-.header button{
-  border: none;
+.header button {
   border-radius: 25px;
+  border: 0.15rem solid white;
   padding: 10px;
   cursor: pointer;
-  background-color: lightblue;
-  color: black;
+  background-color: red;
+  color: whitesmoke;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: larger;
+  margin: 1rem;
   font-weight: bold;
+}
+
+.header button:hover{
+  border-color: red;
 }
 
 .header h1{
